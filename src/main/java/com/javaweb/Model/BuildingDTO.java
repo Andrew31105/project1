@@ -4,9 +4,9 @@ public class BuildingDTO {
 	private String name;
 	private Integer numberOfBasement;
 	private String adress;
-	private String name_Manager;
-	private String phoneNumberManager;
-	private Integer areaFloor;
+	private String ManagerName;
+	private String ManagerPhoneNumbers;
+	private Integer FloorArea;
 	private Integer rentPrice;
 	private String typeFloor;
 	private Integer BrokeRangeFee;
@@ -29,23 +29,23 @@ public class BuildingDTO {
 	public void setAdress(String adress) {
 		this.adress = adress;
 	}
-	public String getName_Manager() {
-		return name_Manager;
+	public String getManagerName() {
+		return ManagerName;
 	}
-	public void setName_Manager(String name_Manager) {
-		this.name_Manager = name_Manager;
+	public void setManagerName(String managerName) {
+		ManagerName = managerName;
 	}
-	public String getPhoneNumberManager() {
-		return phoneNumberManager;
+	public String getManagerPhoneNumbers() {
+		return ManagerPhoneNumbers;
 	}
-	public void setPhoneNumberManager(String phoneNumberManager) {
-		this.phoneNumberManager = phoneNumberManager;
+	public void setManagerPhoneNumbers(String managerPhoneNumbers) {
+		ManagerPhoneNumbers = managerPhoneNumbers;
 	}
-	public Integer getAreaFloor() {
-		return areaFloor;
+	public Integer getFloorArea() {
+		return FloorArea;
 	}
-	public void setAreaFloor(Integer areaFloor) {
-		this.areaFloor = areaFloor;
+	public void setFloorArea(Integer floorArea) {
+		FloorArea = floorArea;
 	}
 	public Integer getRentPrice() {
 		return rentPrice;

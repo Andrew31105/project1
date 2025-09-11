@@ -34,8 +34,7 @@ public class BuildingServiceImpl implements BuildingService{
 			BuildingDTO building = new BuildingDTO();
 			building = buildingDTOConverter.toBuildingDTO(item);
 			result.add(building);
-		}
-		
+		}	
 		return result;
 	}
 

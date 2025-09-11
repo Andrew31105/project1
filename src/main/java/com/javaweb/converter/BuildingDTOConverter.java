@@ -3,6 +3,7 @@ package com.javaweb.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +23,15 @@ public class BuildingDTOConverter {
 	@Autowired
 	private RentAreaRepository rentAreaRepository;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	public BuildingDTO toBuildingDTO(BuildingEntity item) {
 		BuildingDTO building = new BuildingDTO();
-		building.setName(item.getName());
+		building = modelMapper.map(item, BuildingDTO.class);
 		DistrictEntity districtEntity = districtRepository.findNameBy(item.getDistrictId());
 		List<RentAreaEntity> rentAreas = rentAreaRepository.getValueByBuildingId(item.getId());
 		building.setAdress(item.getStreet() + "," + item.getWard() +"," + districtEntity.getName());
-		building.setName_Manager(item.getManagerName());
-		building.setNumberOfBasement(item.getNumberOfBasement());
-		building.setPhoneNumberManager(item.getManagerPhoneNumbers());
-		building.setRentPrice(item.getRentPrice());
-		building.setAreaFloor(item.getFloorArea());
 		String areaResults = rentAreas.stream().map(it -> it.getValue().toString()).collect(Collectors.joining(","));
 		building.setRentArea(areaResults);
 		building.setTypeFloor(item.getTypeFloor());
