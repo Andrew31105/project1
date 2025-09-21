@@ -25,7 +25,6 @@ public class MapUtils {
 			if (tClass.getTypeName().equals("java.lang.String")) {
 				if (obj != "") {
 					obj = obj.toString();
-					x = 3;
 				} else {
 					obj = null;
 				}

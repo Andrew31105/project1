@@ -1,96 +1,172 @@
 package com.javaweb.repository.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "building")
 public class BuildingEntity {
-	private Integer Id;
-	private String Name;
-	private Integer NumberOfBasement;
-	private String Ward;
-	private Integer DistrictId;
-	private String Street;
-	private Integer FloorArea;
-	private Integer RentPrice;
-	private Integer ServiceFee;
-	private Integer BrokeRangeFee;
-	private String ManagerName;
-	private String ManagerPhoneNumbers;
-	private String TypeFloor;
-	public Integer getId() {
-		return Id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "numberofbasement")
+    private Integer numberOfBasement;
+
+    @Column(name = "ward")
+    private String ward;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "floorarea")
+    private Integer floorArea;
+
+    @Column(name = "rentprice")
+    private Integer rentPrice;
+
+    @Column(name = "servicefee")
+    private Integer serviceFee;
+
+    @Column(name = "brokeragefee")
+    private Integer brokeRageFee;
+
+    @Column(name = "managername")
+    private String managerName;
+
+    @Column(name = "managerphonenumber")
+    private String managerPhoneNumber;
+
+    @Column(name = "level")
+    private String level;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "districtid")
+    private DistrictEntity district;
+
+    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RentAreaEntity> rentAreas = new ArrayList<>();
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getNumberOfBasement() {
+        return numberOfBasement;
+    }
+
+    public void setNumberOfBasement(Integer numberOfBasement) {
+        this.numberOfBasement = numberOfBasement;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Integer getFloorArea() {
+        return floorArea;
+    }
+
+    public void setFloorArea(Integer floorArea) {
+        this.floorArea = floorArea;
+    }
+
+    public Integer getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(Integer rentPrice) {
+        this.rentPrice = rentPrice;
+    }
+
+    public Integer getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(Integer serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
+    public Integer getBrokeRageFee() {
+        return brokeRageFee;
+    }
+
+    public void setBrokeRangeFee(Integer brokeRageFee) {
+        this.brokeRageFee = brokeRageFee;
+    }
+
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getManagerPhoneNumber() {
+        return managerPhoneNumber;
+    }
+
+    public void setManagerPhoneNumber(String managerPhoneNumber) {
+        this.managerPhoneNumber = managerPhoneNumber;
+    }
+
+
+    public String getLevel() {
+		return level;
 	}
-	public void setId(Integer id) {
-		Id = id;
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
-	public String getName() {
-		return Name;
+
+	public void setBrokeRageFee(Integer brokeRageFee) {
+		this.brokeRageFee = brokeRageFee;
 	}
-	public void setName(String name) {
-		Name = name;
-	}
-	public Integer getNumberOfBasement() {
-		return NumberOfBasement;
-	}
-	public void setNumberOfBasement(Integer numberOfBasement) {
-		NumberOfBasement = numberOfBasement;
-	}
-	public String getWard() {
-		return Ward;
-	}
-	public void setWard(String ward) {
-		Ward = ward;
-	}
-	public Integer getDistrictId() {
-		return DistrictId;
-	}
-	public void setDistrictId(Integer districtId) {
-		DistrictId = districtId;
-	}
-	public String getStreet() {
-		return Street;
-	}
-	public void setStreet(String street) {
-		Street = street;
-	}
-	public Integer getFloorArea() {
-		return FloorArea;
-	}
-	public void setFloorArea(Integer floorArea) {
-		FloorArea = floorArea;
-	}
-	public Integer getRentPrice() {
-		return RentPrice;
-	}
-	public void setRentPrice(Integer rentPrice) {
-		RentPrice = rentPrice;
-	}
-	public Integer getServiceFee() {
-		return ServiceFee;
-	}
-	public void setServiceFee(Integer serviceFee) {
-		ServiceFee = serviceFee;
-	}
-	public Integer getBrokeRangeFee() {
-		return BrokeRangeFee;
-	}
-	public void setBrokeRangeFee(Integer brokeRangeFee) {
-		BrokeRangeFee = brokeRangeFee;
-	}
-	public String getManagerName() {
-		return ManagerName;
-	}
-	public void setManagerName(String managerName) {
-		ManagerName = managerName;
-	}
-	public String getManagerPhoneNumbers() {
-		return ManagerPhoneNumbers;
-	}
-	public void setManagerPhoneNumbers(String managerPhoneNumbers) {
-		ManagerPhoneNumbers = managerPhoneNumbers;
-	}
-	public String getTypeFloor() {
-		return TypeFloor;
-	}
-	public void setTypeFloor(String typeFloor) {
-		TypeFloor = typeFloor;
-	}
-	
+
+	public DistrictEntity getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(DistrictEntity district) {
+        this.district = district;
+    }
+
+    public List<RentAreaEntity> getRentAreas() {
+        return rentAreas;
+    }
+
+    public void setRentAreas(List<RentAreaEntity> rentAreas) {
+        this.rentAreas = rentAreas;
+    }
 }

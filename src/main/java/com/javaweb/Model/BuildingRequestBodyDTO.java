@@ -1,17 +1,11 @@
 package com.javaweb.Model;
 
-public class BuildingDTO {
+public class BuildingRequestBodyDTO {
 	private String name;
 	private Integer numberOfBasement;
-	private String adress;
 	private String ManagerName;
 	private String ManagerPhoneNumbers;
 	private Integer FloorArea;
-	private Integer rentPrice;
-	private String level;
-	private Integer BrokeRageFee;
-	private String rentArea;
-	private Integer DistrictId;
 	public String getName() {
 		return name;
 	}
@@ -23,12 +17,6 @@ public class BuildingDTO {
 	}
 	public void setNumberOfBasement(Integer numberOfBasement) {
 		this.numberOfBasement = numberOfBasement;
-	}
-	public String getAdress() {
-		return adress;
-	}
-	public void setAdress(String adress) {
-		this.adress = adress;
 	}
 	public String getManagerName() {
 		return ManagerName;
@@ -54,14 +42,18 @@ public class BuildingDTO {
 	public void setRentPrice(Integer rentPrice) {
 		this.rentPrice = rentPrice;
 	}
-
 	public String getLevel() {
 		return level;
 	}
 	public void setLevel(String level) {
 		this.level = level;
 	}
-
+	public Integer getBrokeRageFee() {
+		return BrokeRageFee;
+	}
+	public void setBrokeRageFee(Integer brokeRageFee) {
+		BrokeRageFee = brokeRageFee;
+	}
 	public String getRentArea() {
 		return rentArea;
 	}
@@ -74,14 +66,23 @@ public class BuildingDTO {
 	public void setDistrictId(Integer districtId) {
 		DistrictId = districtId;
 	}
-	public Integer getBrokeRageFee() {
-		return BrokeRageFee;
+	public String getWard() {
+		return ward;
 	}
-	public void setBrokeRageFee(Integer brokeRageFee) {
-		BrokeRageFee = brokeRageFee;
+	public void setWard(String ward) {
+		this.ward = ward;
 	}
-	
-	
-	
-	
+	public String getStreet() {
+		return Street;
+	}
+	public void setStreet(String street) {
+		Street = street;
+	}
+	private Integer rentPrice;
+	private String level;
+	private Integer BrokeRageFee;
+	private String rentArea;
+	private Integer DistrictId;
+	private String ward;
+	private String Street;
 }

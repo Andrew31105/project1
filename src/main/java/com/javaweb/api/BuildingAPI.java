@@ -4,14 +4,24 @@ package com.javaweb.api;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.Model.BuildingDTO;
+import com.javaweb.Model.BuildingRequestBodyDTO;
+import com.javaweb.repository.entity.BuildingEntity;
+import com.javaweb.repository.entity.DistrictEntity;
 import com.javaweb.service.BuildingService;
 
 
@@ -20,12 +30,45 @@ import com.javaweb.service.BuildingService;
 public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
-	
+	@PersistenceContext
+	private EntityManager entityManager;
 	@RequestMapping(value="/api/building", method = RequestMethod.GET)
 		public List<BuildingDTO> Get_building(@RequestParam Map<String,Object> params,
 				@RequestParam List<String> typeCode) {
 			List<BuildingDTO> result = buildingService.findAll(params, typeCode);
 			return result;
 		}
+	
+	@PostMapping(value="/api/building")
+		public void createBuilding(@RequestBody BuildingRequestBodyDTO buildingRequestBodyDTO) {
+		buildingService.addBuilding(buildingRequestBodyDTO);
+	}
+	
+	@PutMapping(value = "/api/building/")
+	public void updateBuilding(@RequestBody BuildingRequestBodyDTO buildingRequestDTO) {
+	    BuildingEntity builEntity = new BuildingEntity();
+	    builEntity.setId(1);
+	    builEntity.setName(buildingRequestDTO.getName());
+	    builEntity.setStreet(buildingRequestDTO.getStreet());
+	    builEntity.setWard(buildingRequestDTO.getWard());
+	    DistrictEntity districtEntity = new DistrictEntity();
+	    districtEntity.setId(buildingRequestDTO.getDistrictId());
+	    builEntity.setDistrict(districtEntity);
+	    entityManager.persist(builEntity);
+
+	    System.out.print("ok");
+	}
+	
+	@DeleteMapping(value = "/api/building/{id}")
+	public void deleteBuilding(@PathVariable Integer id) {
+	    BuildingEntity buildingEntity = entityManager.find(BuildingEntity.class, id);
+	    if (buildingEntity != null) {
+	        entityManager.remove(buildingEntity);
+	        System.out.print("Deleted building id = " + id);
+	    } else {
+	        System.out.print("Building not found: id = " + id);
+	    }
+	}
+
 	
 }	

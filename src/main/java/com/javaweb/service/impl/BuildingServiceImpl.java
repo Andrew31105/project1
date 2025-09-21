@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaweb.Model.BuildingDTO;
+import com.javaweb.Model.BuildingRequestBodyDTO;
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.converter.BuildingDTOConverter;
+import com.javaweb.converter.BuildingEntityConverter;
 import com.javaweb.converter.BuildingSearchBuilderConverter;
 import com.javaweb.repository.BuildingRepository;
 
@@ -30,6 +33,8 @@ public class BuildingServiceImpl implements BuildingService{
 	@Autowired
 	private BuildingSearchBuilderConverter buildingSearchBuilderConverter;
 	
+	@Autowired
+	private BuildingEntityConverter buildingEntityConverter;
 	@Override
 	public List<BuildingDTO> findAll(Map<String,Object> params ,List<String> typeCode) {
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(params,typeCode);
@@ -42,6 +47,13 @@ public class BuildingServiceImpl implements BuildingService{
 			result.add(building);
 		}	
 		return result;
+	}
+
+	@Override
+	@Transactional
+	public void addBuilding(BuildingRequestBodyDTO buildingRequestBodyDTO) {
+		BuildingEntity buildingEntity = buildingEntityConverter.buildingEntityConverter(buildingRequestBodyDTO);
+		buildingRepository.addBuilding(buildingEntity);
 	}
 
 }
