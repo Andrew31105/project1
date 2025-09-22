@@ -40,7 +40,6 @@ public class BuildingServiceImpl implements BuildingService{
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(params,typeCode);
 		List<BuildingEntity> buildingEntity = buildingRepository.findAll(buildingSearchBuilder);
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>();
-		
 		for(BuildingEntity item : buildingEntity) {
 			BuildingDTO building = new BuildingDTO();
 			building = buildingDTOConverter.toBuildingDTO(item);
@@ -49,11 +48,5 @@ public class BuildingServiceImpl implements BuildingService{
 		return result;
 	}
 
-	@Override
-	@Transactional
-	public void addBuilding(BuildingRequestBodyDTO buildingRequestBodyDTO) {
-		BuildingEntity buildingEntity = buildingEntityConverter.buildingEntityConverter(buildingRequestBodyDTO);
-		buildingRepository.addBuilding(buildingEntity);
-	}
 
 }

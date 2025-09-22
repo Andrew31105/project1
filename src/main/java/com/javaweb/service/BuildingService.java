@@ -8,5 +8,4 @@ import com.javaweb.Model.BuildingRequestBodyDTO;
 
 public interface BuildingService {
 	List<BuildingDTO> findAll(Map<String,Object> params, List<String> typeCode);
-	void addBuilding(BuildingRequestBodyDTO buildingRequestBodyDTO);
 }

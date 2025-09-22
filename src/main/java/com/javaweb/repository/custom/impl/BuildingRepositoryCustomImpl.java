@@ -1,4 +1,4 @@
-package com.javaweb.repository.impl;
+package com.javaweb.repository.custom.impl;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -7,10 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.builder.BuildingSearchBuilder;
@@ -22,7 +28,8 @@ import javax.persistence.Query;
 
 
 @Repository
-public class JDBCBuildingRepositoryImpl implements BuildingRepository  {
+@Primary
+public class BuildingRepositoryCustomImpl implements BuildingRepositoryCustom  {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -124,7 +131,7 @@ public class JDBCBuildingRepositoryImpl implements BuildingRepository  {
         List<BuildingEntity> result = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT b.id, b.districtId, b.name ,"
         		+ " b.ward, b.street, b.districtid , b.servicefee, "
-        		+ "b.numberofbasement, b.floorarea, b.managername,b.brokeragefee,"
+        		+ "b.numberofbasement,b.level , b.floorarea, b.managername,b.brokeragefee,"
         		+ "b.managerphonenumber,b.rentprice, b.direction from building b");
         Join_Table(buildingSearchBuilder,sql);
         StringBuilder where = new StringBuilder(" WHERE 1 = 1 ");
@@ -134,14 +141,158 @@ public class JDBCBuildingRepositoryImpl implements BuildingRepository  {
         sql.append(where);
         Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
         return query.getResultList();
-    }
+    }}
 
-	@Override
-	public void addBuilding(BuildingEntity buildingEntity) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void addBuilding(BuildingEntity buildingEntity) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public List<BuildingEntity> findAll() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<BuildingEntity> findAll(Sort sort) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<BuildingEntity> findAllById(Iterable<Long> ids) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> List<S> saveAll(Iterable<S> entities) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void flush() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> S saveAndFlush(S entity) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void deleteInBatch(Iterable<BuildingEntity> entities) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteAllInBatch() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public BuildingEntity getOne(Long id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> List<S> findAll(Example<S> example) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> List<S> findAll(Example<S> example, Sort sort) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Page<BuildingEntity> findAll(Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> S save(S entity) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Optional<BuildingEntity> findById(Long id) {
+//		// TODO Auto-generated method stub
+//		return Optional.empty();
+//	}
+//
+//	@Override
+//	public boolean existsById(Long id) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
-}
-
-
+//	@Override
+//	public long count() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public void deleteById(Long id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void delete(BuildingEntity entity) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteAll(Iterable<? extends BuildingEntity> entities) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void deleteAll() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> Optional<S> findOne(Example<S> example) {
+//		// TODO Auto-generated method stub
+//		return Optional.empty();
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> long count(Example<S> example) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public <S extends BuildingEntity> boolean exists(Example<S> example) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//}
+//
+//
